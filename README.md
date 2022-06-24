@@ -54,5 +54,15 @@ svgo-loader@2.2.1
   ]
 },
 ```
-安装 `yarn add @babel/helper-create-regexp-features-plugin` ，否则 yarn start 可能会打不开
+安装 `yarn add @babel/helper-create-regexp-features-plugin` ，否则 yarn start 可能会打不开  
+如果使用 import 引入 svg文件，会出现 TreeShaking，也就是 如果该文件没有被引用（虽然我们在 <svg> 标签中引用了），那么就不会被编译，也就相当于没用。  
+但是使用 require 就不会受到影响。  
+
+- 如何直接引入 SVG 文件夹
+由于 typescript 不认识 js 的代码，需要安装 `yarn add --dev @types/webpack-env@1.15.1`  
+```js
+let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
+try {importAll(require.context('icons', true, /\.svg$/));} catch (error) {console.log(error);}
+```
+
 
