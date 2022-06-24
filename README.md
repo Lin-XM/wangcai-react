@@ -65,4 +65,7 @@ let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireCo
 try {importAll(require.context('icons', true, /\.svg$/));} catch (error) {console.log(error);}
 ```
 
+## 页面布局
+使用 active class 实现选中Nav 标签页高亮.  
+使用 svgo-loader 去除 svg 的fill的颜色。 
 
