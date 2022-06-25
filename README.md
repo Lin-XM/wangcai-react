@@ -77,8 +77,6 @@ const NoteSection: React.FC = () =>{
   const [note, setNote] = useState('');
   const refInput = useRef<HTMLInputElement>(null)
   console.log(note);
-
-
   return (
     <Wrapper>
       <label>
@@ -86,7 +84,6 @@ const NoteSection: React.FC = () =>{
         <input type="text" placeholder='你还没有输入备注~'
             value={note}
              onChange={(e)=>setNote(e.target.value)}
-
         />
       </label>
     </Wrapper>
