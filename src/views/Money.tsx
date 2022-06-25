@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
 import {CategorySection} from './Money/CategorySection';
-import {NotesSection} from './Money/NoteSection';
+import {NoteSection} from './Money/NoteSection';
 import {NumberPadSection} from './Money/NumberPadSection';
 import {TagsSection} from './Money/TagsSection';
 
@@ -14,15 +14,9 @@ const MyLayout = styled(Layout)`
 function Money() {
   return (
     <MyLayout >
-      <TagsSection>
+      <TagsSection />
+      <NoteSection />
 
-      </TagsSection>
-      <NotesSection>
-        <label>
-          <span>备注：</span>
-          <input type="text" placeholder='你还没有输入备注~'/>
-        </label>
-      </NotesSection>
       <CategorySection>
         <ul>
           <li className="selected">支出</li>

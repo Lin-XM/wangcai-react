@@ -69,3 +69,49 @@ try {importAll(require.context('icons', true, /\.svg$/));} catch (error) {consol
 使用 active class 实现选中Nav 标签页高亮.  
 使用 svgo-loader 去除 svg 的fill的颜色。 
 
+## NoteSection 的要点
+处理 Note 的输入可以用 受控组件和非受控组件
+```ts
+// 受控组件方式 监视 Note 的变化
+const NoteSection: React.FC = () =>{
+  const [note, setNote] = useState('');
+  const refInput = useRef<HTMLInputElement>(null)
+  console.log(note);
+
+
+  return (
+    <Wrapper>
+      <label>
+        <span>备注：</span>
+        <input type="text" placeholder='你还没有输入备注~'
+            value={note}
+             onChange={(e)=>setNote(e.target.value)}
+
+        />
+      </label>
+    </Wrapper>
+  );
+};
+
+// 非受控组件 鼠标移除 输入框 记录Note
+// .....
+  const xxx = ()=>{
+   if(refInput.current !== null){
+     console.log(refInput.current.value);
+     setNote(refInput.current.value)
+   }
+  }
+  return (
+    <Wrapper>
+      <label>
+        <span>备注：</span>
+        <input type="text" placeholder='你还没有输入备注~'
+            defaultValue={note}
+            onBlur={xxx}
+            ref={refInput}
+        />
+      </label>
+    </Wrapper>
+// ....
+           
+```
