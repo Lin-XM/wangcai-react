@@ -5,9 +5,14 @@ import styled from 'styled-components';
 const TagsSection = styled.section`
   background-color: #FFFFFF;
   padding: 12px 16px;
-  
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   > ol{
     margin:  0 -12px;
+    
     >li{
       background-color: #D9D9D9;
       border-radius: 18px;
@@ -47,6 +52,7 @@ const NotesSection = styled.section`
       }
     }
 `;
+
 const CategorySection = styled.section`
   > ul{
   display: flex;
@@ -72,12 +78,70 @@ const CategorySection = styled.section`
   }
 
 `;
-const NumberPadSection = styled.section``;
 
+const NumberPadSection = styled.section`
+display: flex;
+flex-direction: column;
+  > .output{
+    background-color: white;
+    font-size: 36px;
+    line-height: 72px;
+    text-align: right;
+    padding: 0 16px;
+    box-shadow: inset 0 -5px 5px -5px rgba(0,0,0,0.25),
+                inset 0 5px 5px -5px rgba(0,0,0,0.25);
+  }
+  > .Pad{
+    > button{
+      float:left ;
+      width: 25%;
+      height: 64px;
+      font-size:18px;
+      border:none;
+      &.ok{
+        float: right;
+        height:128px;
+      }
+      &.zero{
+      width: 50%;
+      }
+      &:nth-child(1){
+        background-color: #90f8f8;
+      }
+      &:nth-child(2),&:nth-child(5){
+        background-color:#90f8f8;
+      }
+      &:nth-child(3),&:nth-child(6),&:nth-child(9){
+        background-color:#90f8f8;
+      }
+      &:nth-child(4),&:nth-child(7),&:nth-child(10){
+        background-color:#90f8f8;
+      }
+      &:nth-child(8),&:nth-child(11),&:nth-child(13){
+        background-color:#90f8f8;
+      }
+       &:nth-child(12){
+        background-color:#90f8f8;
+      }
+      &:nth-child(14){
+          background-color:#90f8f8;
+      }
+      
+      
+       
+    }
+  }
+
+`;
+
+const MyLayout = styled(Layout)`
+  display: flex;
+  flex-direction: column;
+`
 
 function Money() {
   return (
-    <Layout>
+    <MyLayout >
       <TagsSection>
         <ol>
           <li>衣</li>
@@ -100,8 +164,8 @@ function Money() {
         </ul>
       </CategorySection>
       <NumberPadSection>
-        <div>100</div>
-        <div>
+        <div className='output'>100</div>
+        <div className='Pad clearfix'>
           <button>1</button>
           <button>2</button>
           <button>3</button>
@@ -116,15 +180,13 @@ function Money() {
           <button>7</button>
           <button>8</button>
           <button>9</button>
-          <button>enter</button>
+          <button className='ok'>OK</button>
+          <button className='zero'>0</button>
+          <button className='dot'>.</button>
 
-          <button>0</button>
-          <button>.</button>
-          <button>+</button>
-          <button>-</button>
         </div>
       </NumberPadSection>
-    </Layout>
+    </MyLayout>
   );
 }
 

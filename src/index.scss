@@ -25,3 +25,8 @@ button{
 :focus{
   outline:none;
 }
+.clearfix::after{
+  content:'';
+  clear: both;
+  display: block;
+}
