@@ -54,7 +54,15 @@ flex-direction: column;
 `;
 
 const NumberPadSection: React.FC = () => {
-  const [output, setOutput] = useState('0');
+  const setOutput = (output:string)=>{
+    if(output.length>16){
+      output= output.slice(0,16)
+    }else if(output.length === 0){
+      output ='0'
+    }
+    _setOutput( output)
+  }
+  const [output, _setOutput] = useState('0');
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) return;
@@ -76,9 +84,15 @@ const NumberPadSection: React.FC = () => {
         }
         break;
       case 'C':
+        setOutput('')
         console.log('清空');
         break;
       case 'CE':
+        if(output.length ===1){
+          setOutput('')
+        }else{
+          setOutput(output.slice(0,-1))
+        }
         console.log('删除');
         break;
       case 'OK':
@@ -86,6 +100,8 @@ const NumberPadSection: React.FC = () => {
         break;
       case '.':
         console.log('点');
+        if(output.indexOf('.') >= 0 ){return;}
+        setOutput(output+ '.')
         break;
     }
   };
