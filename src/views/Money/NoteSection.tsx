@@ -40,7 +40,6 @@ const NoteSection: React.FC<PropsType> = (props) => {
   // 非受控组件写法的方式 类似于 Vue的 v-model.lazy=''
   const onBlur = () => {
     if (refInput.current !== null) {
-      console.log(refInput.current.value);
       props.onChange(refInput.current.value);
     }
   };
