@@ -1,28 +1,43 @@
-import React, {useState} from 'react';
-import { Wrapper } from './NumberPadSection/Wrapper';
+import React from 'react';
+import {Wrapper} from './NumberPadSection/Wrapper';
 import {generageOutput} from './NumberPadSection/generateOutput';
 
+type PropsType = {
+  value: number,
+  onChange: (value: number) => void,
+  onOK?: () => void
+}
 
-
-const NumberPadSection: React.FC = () => {
-  const setOutput = (output:string)=>{
-    if(output.length>16){
-      output= output.slice(0,16)
-    }else if(output.length === 0){
-      output ='0'
+const NumberPadSection: React.FC<PropsType> = (props) => {
+  const setOutput = (output: string) => {
+    let outputValue;
+    if (output.length > 16) {
+      outputValue = parseFloat(output.slice(0, 16));
+    } else if (output.length === 0) {
+      outputValue = 0;
+    } else {
+      outputValue = parseFloat(output);
     }
-    _setOutput( output)
-  }
-  const [output, _setOutput] = useState('0');
+    props.onChange(outputValue);
+  };
+  // const [output, _setOutput] = useState('0');
+  const output = props.value.toString();
+
+
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) return;
-    // TODO
-    if(text === 'OK'){return ;}
 
-    if('0123456789.'.split('').concat(['C','CE']).indexOf(text)>=0){
+    if (text === 'OK') {
+      if(props.onOK){
+        props.onOK()
+      }
+      return;
+    }
 
-      setOutput(generageOutput(text,output))
+    if ('0123456789.'.split('').concat(['C', 'CE']).indexOf(text) >= 0) {
+
+      setOutput(generageOutput(text, output));
     }
   };
 

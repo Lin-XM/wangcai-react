@@ -35,9 +35,12 @@ const Wrapper = styled.section`
   }
 `;
 
-const TagsSection: React.FunctionComponent = () => {
+type PropsType = { value: string[], onChange:( selected:string[])=>void }
+
+const TagsSection: React.FunctionComponent<PropsType> = (props) => {
+  const selectedTags = props.value
   const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  // const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const onAddTag = () => {
     const tagName = window.prompt('新标签名称为：');
@@ -49,10 +52,10 @@ const TagsSection: React.FunctionComponent = () => {
   const onToggleTag = (tag: string) => {
     const index = selectedTags.indexOf(tag);
     if (index >= 0) {
-      setSelectedTags(selectedTags.filter(t => t !== tag));
+      props.onChange(selectedTags.filter(t => t !== tag));
       // 如果 标签在 选中的里面，就将没有选中的标签 筛选出来，剩下选中的到 setSelectedTags的里面，其他的就留在选中标签里面，
     } else {
-      setSelectedTags([...selectedTags, tag]);
+      props.onChange([...selectedTags, tag]);
     }
   };
 
