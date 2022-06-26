@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React, {useState} from 'react';
 
-const CategorySection = styled.section`
+const Wrapper = styled.section`
   > ul{
   display: flex;
   background-color: #47f69f;
@@ -26,4 +27,25 @@ const CategorySection = styled.section`
 
 `;
 
-export {CategorySection}
+const CategorySection: React.FC = () => {
+  const categoryMap = {'-': '支出', '+': '收入'};
+  // type Keys = keyof typeof  categoryMap   // 然后categoryList 类型就是zhegeKeys
+
+  const [category, setCategory] = useState('-');    // - 表示支出， + 表示收入
+  const [categoryList] = useState<('-' | '+')[]>(['-', '+']);
+
+
+  return (
+    <Wrapper>
+      <ul>
+        {categoryList.map(c =>
+          <li className={category === c ? 'selected' : ''} onClick={() => {setCategory(c);}} key={c}>{categoryMap[c]}</li>
+        )}
+
+        {/*<li className={category === '+' ? 'selected' : ''} onClick={() => setCategory('+')}>收入</li>*/}
+      </ul>
+    </Wrapper>
+  );
+};
+
+export {CategorySection};

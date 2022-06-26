@@ -77,8 +77,6 @@ const NoteSection: React.FC = () =>{
   const [note, setNote] = useState('');
   const refInput = useRef<HTMLInputElement>(null)
   console.log(note);
-
-
   return (
     <Wrapper>
       <label>
@@ -86,7 +84,6 @@ const NoteSection: React.FC = () =>{
         <input type="text" placeholder='你还没有输入备注~'
             value={note}
              onChange={(e)=>setNote(e.target.value)}
-
         />
       </label>
     </Wrapper>
@@ -115,3 +112,6 @@ const NoteSection: React.FC = () =>{
 // ....
            
 ```
+- React/HTMl 的 onChange  
+HTML onchange 事件是在 鼠标移出 输入框的时候触发的。该事件触发时机要早于 onBlur  
+React onChange 会在输入第一个字符的时候就触发。  

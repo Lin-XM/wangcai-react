@@ -61,11 +61,8 @@ const TagsSection: React.FunctionComponent = () => {
   return (
     <Wrapper>
       <ol>
-        {tags.map
-        (tag =>
-          <li onClick={() => onToggleTag(tag)}
-              className={getClass(tag)}
-              key={tag}>{tag}</li>)
+        {tags.map(tag =>
+          <li onClick={() => onToggleTag(tag)} className={getClass(tag)} key={tag}>{tag}</li>)
         }
 
       </ol>
