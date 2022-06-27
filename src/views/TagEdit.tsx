@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import {Button} from '../components/Button';
 import styled from 'styled-components';
+import {Input} from '../components/Input';
 
 type ParamsType = {
   id: string
@@ -17,14 +18,28 @@ const Topbar = styled.header`
   line-height: 20px;
   padding: 14px;
   background-color: white;
-`
-
+`;
+const InputWrapper = styled.div`
+background-color: white;
+padding: 0 16px;
+margin-top: 8px;
+`;
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const Space = styled.div`
+  height: 48px;
+`;
 
 const TagEdit: React.FC = () => {
   let {id} = useParams<ParamsType>();
   const {findTag} = useTags();
 
   const tag = findTag(parseInt(id));
+  console.log(tag);
 
   return (
     <Layout>
@@ -32,21 +47,18 @@ const TagEdit: React.FC = () => {
         <Topbar>
           <Icon name='left'/>
           <span>编辑标签</span>
-          <Icon name='' />
+          <Icon name=''/>
         </Topbar>
       </div>
-      <div>
-        <label>
-          <span>标签名</span>
-          <input type="text" placeholder='标签名'
-          />
-        </label>
-      </div>
-      <div>
+      <InputWrapper>
+        <Input value={tag.name} label='标签名' type='text' placeholder='输入你的标签名~'/>
+      </InputWrapper>
+      <Center>
+        <Space/>
         <Button>
           删除标签
-         </Button>
-      </div>
+        </Button>
+      </Center>
 
     </Layout>
   );
