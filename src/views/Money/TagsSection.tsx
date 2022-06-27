@@ -36,10 +36,13 @@ const Wrapper = styled.section`
   }
 `;
 
-type PropsType = { value: string[], onChange:( selected:string[])=>void }
+type PropsType = {
+  value: number[],
+  onChange:( selected:number[])=>void
+}
 
 const TagsSection: React.FunctionComponent<PropsType> = (props) => {
-  const selectedTags = props.value
+  const selectedTagIds = props.value
   const {tags,setTags}=useTags()
 
   // const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
@@ -48,29 +51,30 @@ const TagsSection: React.FunctionComponent<PropsType> = (props) => {
   const onAddTag = () => {
     const tagName = window.prompt('新标签名称为：');
     if (tagName !== null) {
-      setTags([...tags, tagName]);          // 新增的数据添加到 原数组的后面
+
+      // 这里暂时使用 随机数作为 ID，
+      setTags([...tags, {id:Math.random(),name:tagName}]);          // 新增的数据添加到 原数组的后面
     }
   };
   // 判断该标签是否被选中
-  const onToggleTag = (tag: string) => {
-    const index = selectedTags.indexOf(tag);
+  const onToggleTag = (tagId: number) => {
+    const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
-      props.onChange(selectedTags.filter(t => t !== tag));
-      // 如果 标签在 选中的里面，就将没有选中的标签 筛选出来，剩下选中的到 setSelectedTags的里面，其他的就留在选中标签里面，
+      props.onChange(selectedTagIds.filter(t => t !== tagId));
+  // 如果 标签在 选中的里面，就将没有选中的标签 筛选出来，剩下选中的到 setSelectedTags的里面，其他的就留在选中标签里面，
     } else {
-      props.onChange([...selectedTags, tag]);
+      props.onChange([...selectedTagIds, tagId]);
     }
   };
 
-  const getClass=(tag:string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : ''
+  const getClass=(tagId:number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
 
   return (
     <Wrapper>
       <ol>
         {tags.map(tag =>
-          <li onClick={() => onToggleTag(tag)} className={getClass(tag)} key={tag}>{tag}</li>)
+          <li key={tag.id} onClick={() => onToggleTag(tag.id)} className={getClass(tag.id)} >{tag.name}</li>)
         }
-
       </ol>
       <button onClick={onAddTag}>新增标签</button>
 
