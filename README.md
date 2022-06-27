@@ -118,3 +118,34 @@ React onChange 会在输入第一个字符的时候就触发。
 
 - React 自定义 hook  
 当您在 一个自定义的函数中使用了 useState, use***, 且返回了一个 读取、写入的接口，这个函数的名称 以useXXXX为例。
+
+## tag 类型的改变
+将 tag:string 变成 tag:{id:number, name:string}   
+id 生成的两种方法：函数、类
+```tsx
+let id1 = 0;
+const createId = () => {
+  id1 += 1;
+  return id1;
+};
+
+export {createId};
+// 实现 id 生成的 第二种方式
+let id2 = 0;
+const IDcard = 10000000
+class Id{
+  value:number;
+  XM(){
+    return IDcard + this.value
+  }
+  constructor() {
+    id2+=1;
+    this.value = id2;
+  }
+
+}
+export {Id}
+// 使用方法的优点：   能够堆返回值进行操作，比如要返回 id=1, 可以加工成为 id 
+// (new id).value
+
+```

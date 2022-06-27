@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from '../../useTags';
+import {createId} from '../../lib/createId';
 
 const Wrapper = styled.section`
   background-color: #FFFFFF;
@@ -53,7 +54,7 @@ const TagsSection: React.FunctionComponent<PropsType> = (props) => {
     if (tagName !== null) {
 
       // 这里暂时使用 随机数作为 ID，
-      setTags([...tags, {id:Math.random(),name:tagName}]);          // 新增的数据添加到 原数组的后面
+      setTags([...tags, {id:createId(),name:tagName}]);          // 新增的数据添加到 原数组的后面
     }
   };
   // 判断该标签是否被选中
