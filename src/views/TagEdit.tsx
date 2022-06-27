@@ -35,10 +35,9 @@ const Space = styled.div`
 `;
 
 const TagEdit: React.FC = () => {
-  let {id} = useParams<ParamsType>();
-  const {findTag} = useTags();
-
-  const tag = findTag(parseInt(id));
+  let {id: idString} = useParams<ParamsType>();
+  const {findTag, updateTag} = useTags();
+  const tag = findTag(parseInt(idString));
   console.log(tag);
 
   return (
@@ -51,7 +50,8 @@ const TagEdit: React.FC = () => {
         </Topbar>
       </div>
       <InputWrapper>
-        <Input value={tag.name} label='标签名' type='text' placeholder='输入你的标签名~'/>
+        <Input value={tag.name} label='标签名' type='text' placeholder='输入你的标签名~'
+               onChange={(e) => {updateTag(tag.id, {name: e.target.value});}}/>
       </InputWrapper>
       <Center>
         <Space/>
