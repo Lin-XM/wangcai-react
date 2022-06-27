@@ -36,9 +36,23 @@ const Space = styled.div`
 
 const TagEdit: React.FC = () => {
   let {id: idString} = useParams<ParamsType>();
-  const {findTag, updateTag} = useTags();
+  const {findTag, updateTag, deleteTag} = useTags();
   const tag = findTag(parseInt(idString));
-  console.log(tag);
+
+  const tagContent = (tag: { id: number; name: string }) => (
+    <div>
+      <InputWrapper>
+        <Input value={tag.name} label='标签名' type='text' placeholder='输入你的标签名~'
+               onChange={(e) => {updateTag(tag.id, {name: e.target.value});}}/>
+      </InputWrapper>
+      <Center>
+        <Space/>
+        <Button onClick={() => deleteTag(tag.id)}>
+          删除标签
+        </Button>
+      </Center>
+    </div>
+  );
 
   return (
     <Layout>
@@ -49,16 +63,8 @@ const TagEdit: React.FC = () => {
           <Icon name=''/>
         </Topbar>
       </div>
-      <InputWrapper>
-        <Input value={tag.name} label='标签名' type='text' placeholder='输入你的标签名~'
-               onChange={(e) => {updateTag(tag.id, {name: e.target.value});}}/>
-      </InputWrapper>
-      <Center>
-        <Space/>
-        <Button>
-          删除标签
-        </Button>
-      </Center>
+
+      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
 
     </Layout>
   );
