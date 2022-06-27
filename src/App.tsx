@@ -19,7 +19,7 @@ function App() {
           <Route exact={true} path="/tags">
             <Tags/>
           </Route>
-          <Route exact={true} path="/tags/:tag">
+          <Route exact={true} path="/tags/:id">
             <TagEdit/>
           </Route>
           <Route path="/money">
