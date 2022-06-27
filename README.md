@@ -115,3 +115,6 @@ const NoteSection: React.FC = () =>{
 - React/HTMl 的 onChange  
 HTML onchange 事件是在 鼠标移出 输入框的时候触发的。该事件触发时机要早于 onBlur  
 React onChange 会在输入第一个字符的时候就触发。  
+
+- React 自定义 hook  
+当您在 一个自定义的函数中使用了 useState, use***, 且返回了一个 读取、写入的接口，这个函数的名称 以useXXXX为例。
