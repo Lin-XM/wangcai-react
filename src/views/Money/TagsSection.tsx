@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import {useTags} from '../../useTags';
+import {useTags} from '../../hooks/useTags';
 // import {createId} from '../../lib/createId';
 
 const Wrapper = styled.section`
@@ -45,8 +45,6 @@ type PropsType = {
 const TagsSection: React.FunctionComponent<PropsType> = (props) => {
   const selectedTagIds = props.value
   const {tags,addTag}=useTags()
-
-
 
   // 判断该标签是否被选中
   const onToggleTag = (tagId: number) => {

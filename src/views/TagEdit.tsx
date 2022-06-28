@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-import {useTags} from '../useTags';
+import {useTags} from '../hooks/useTags';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import {Button} from '../components/Button';
@@ -34,7 +34,6 @@ const Center = styled.div`
 const Space = styled.div`
   height: 48px;
 `;
-
 
 
 

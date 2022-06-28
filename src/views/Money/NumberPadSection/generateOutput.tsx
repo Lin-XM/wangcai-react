@@ -1,4 +1,4 @@
-const generageOutput = (text: string, output = '0') => {
+const generateOutput = (text: string, output = '0') => {
 
   switch (text) {
     case '0':
@@ -20,18 +20,21 @@ const generageOutput = (text: string, output = '0') => {
       return ('');
     case 'CE':            // 删除
       if (output.length === 1) {
-        return '';
+        return '0';
       } else {
         return (output.slice(0, -1) || '');
       }
 
     case '.':
-      if (output.indexOf('.') >= 0) {return output;}
-      return (output + '.');
+      if (output.indexOf('.') > 0) {
+        return output;
+      }else{
+        return (output + '.');
+      }
     default:
       return '';
   }
 
 };
 
-export {generageOutput};
+export {generateOutput};

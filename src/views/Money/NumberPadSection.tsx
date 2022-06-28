@@ -1,6 +1,6 @@
 import React from 'react';
 import {Wrapper} from './NumberPadSection/Wrapper';
-import {generageOutput} from './NumberPadSection/generateOutput';
+import {generateOutput} from './NumberPadSection/generateOutput';
 
 type PropsType = {
   value: number,
@@ -35,9 +35,9 @@ const NumberPadSection: React.FC<PropsType> = (props) => {
       return;
     }
 
-    if ('0123456789.'.split('').concat(['C', 'CE']).indexOf(text) >= 0) {
+    if ('.0123456789'.split('').concat(['C', 'CE']).indexOf(text) >= 0) {
 
-      setOutput(generageOutput(text, output));
+      setOutput(generateOutput(text, output));
     }
   };
 

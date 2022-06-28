@@ -1,21 +1,19 @@
-import {useEffect, useRef, useState} from 'react';
-import {createId} from './lib/createId';
+import {useEffect, useState} from 'react';
+import {createId} from '../lib/createId';
+import {useUpdate} from './useUpdate';
 
 // 尝试解决 多次调用 createId 导致 id 的错误增长
-// const defaultTags = [
-//   {id: createId(), name: '衣'},
-//   {id: createId(), name: '食'},
-//   {id: createId(), name: '住'},
-//   {id: createId(), name: '行'}
-// ];
 
 const useTags = () => {                         // 使用 use 开头表示自定义 hook
   const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
 
+
+
   // React 钩子, 需要保证 每次修改之后，变成新的数据。
-  const count = useRef(0);           // 判断是否为 第一次渲染
-  useEffect(() => { count.current += 1; });
+  useUpdate(()=>{
+    window.localStorage.setItem('tags',JSON.stringify(tags))
+  },[tags])
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
       if(localTags.length === 0 ){
@@ -28,14 +26,6 @@ const useTags = () => {                         // 使用 use 开头表示自定
       }
       setTags(localTags)
     }, []);
-  useEffect(() => {
-      if (count.current > 1) {
-        console.log(JSON.stringify(tags));
-        window.localStorage.setItem('tags', JSON.stringify(tags));
-      }
-    }
-    , [tags]
-  );
 
   const findTagIndex = (id: number) => {
     let result = -1;
