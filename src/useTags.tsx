@@ -26,22 +26,16 @@ const useTags = () => {           // 使用 use 开头表示自定义 hook
 
   const updateTag = (id: number, obj: { name: string }) => {
     //深拷贝 一份
-    const index = findTagIndex(id);
-    const tagClone = JSON.parse(JSON.stringify(tags));
-    // 等到新的 tagClone 删掉了第 index 项，换成了 {id: id, name: obj.name}
-    tagClone.splice(index, 1, {id: id, name: obj.name});
-    setTags(tagClone);
+    setTags(tags.map(
+      tag => tag.id === id ? {id, name: obj.name} : tag
+    ));
   };
 
-  const deleteTag = (id:number)=>{
-    const index = findTagIndex(id);
-    const tagClone = JSON.parse(JSON.stringify(tags));
-    tagClone.splice(index, 1);
-    setTags(tagClone);
-
-  }
+  const deleteTag = (id: number) => {
+    setTags(tags.filter(tag => tag.id !== id));
+  };
   return {
-    tags, setTags, findTag, updateTag, findTagIndex,deleteTag,
+    tags, setTags, findTag, updateTag, findTagIndex, deleteTag,
   };
 };
 export {useTags};

@@ -147,5 +147,10 @@ class Id{
 export {Id}
 // 使用方法的优点：   能够堆返回值进行操作，比如要返回 id=1, 可以加工成为 id 
 // (new id).value
-
 ```
+
+- react 合并两个 className  
+下载 classnames 第三方库。  
+
+- history 模式路由  
+这个模式的路由如果存在历史记录，那么第二次前进或回退不会有 刷新

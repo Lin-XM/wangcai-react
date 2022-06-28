@@ -1,5 +1,6 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import {useTags} from '../useTags';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
@@ -34,10 +35,18 @@ const Space = styled.div`
   height: 48px;
 `;
 
+
+
+
 const TagEdit: React.FC = () => {
   let {id: idString} = useParams<ParamsType>();
   const {findTag, updateTag, deleteTag} = useTags();
   const tag = findTag(parseInt(idString));
+
+  let history = useHistory()
+  const onClickBack = () => {
+    history.goBack()
+  };
 
   const tagContent = (tag: { id: number; name: string }) => (
     <div>
@@ -58,7 +67,7 @@ const TagEdit: React.FC = () => {
     <Layout>
       <div>
         <Topbar>
-          <Icon name='left'/>
+          <Icon name='left' onClick={onClickBack}/>
           <span>编辑标签</span>
           <Icon name=''/>
         </Topbar>
