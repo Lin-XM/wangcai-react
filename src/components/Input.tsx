@@ -14,8 +14,8 @@ const Label = styled.label`
       height: 44px;
       background:none;
       border:none;
+      padding-bottom: 3px;
     }
-
 `
 type PropsType = { label:string; } & React.InputHTMLAttributes<HTMLInputElement>
 

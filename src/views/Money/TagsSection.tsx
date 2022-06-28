@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from '../../useTags';
-import {createId} from '../../lib/createId';
+// import {createId} from '../../lib/createId';
 
 const Wrapper = styled.section`
   background-color: #FFFFFF;
@@ -44,19 +44,10 @@ type PropsType = {
 
 const TagsSection: React.FunctionComponent<PropsType> = (props) => {
   const selectedTagIds = props.value
-  const {tags,setTags}=useTags()
+  const {tags,addTag}=useTags()
 
-  // const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
-  // const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const onAddTag = () => {
-    const tagName = window.prompt('新标签名称为：');
-    if (tagName !== null) {
 
-      // 这里暂时使用 随机数作为 ID，
-      setTags([...tags, {id:createId(),name:tagName}]);          // 新增的数据添加到 原数组的后面
-    }
-  };
   // 判断该标签是否被选中
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
@@ -77,7 +68,7 @@ const TagsSection: React.FunctionComponent<PropsType> = (props) => {
           <li key={tag.id} onClick={() => onToggleTag(tag.id)} className={getClass(tag.id)} >{tag.name}</li>)
         }
       </ol>
-      <button onClick={onAddTag}>新增标签</button>
+      <button onClick={addTag}>新增标签</button>
 
     </Wrapper>
   );
