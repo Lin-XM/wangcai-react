@@ -5,9 +5,10 @@ const useUpdate = (fn: () => void, deps: any[]) => {
   useEffect(() => { count.current += 1; });
   useEffect(() => {
       if (count.current > 1) {
-        fn();
+        fn()
       }
     }, deps);
 };
 
 export {useUpdate};
+
