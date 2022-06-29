@@ -56,8 +56,14 @@ const useTags = () => {                         // 使用 use 开头表示自定
   const deleteTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id));
   };
+
+  const getName = (id:number)=>{
+      const tag =  tags.filter(t => t.id  === id )[0]
+      return tag ? tag.name : '';
+  }
+
   return {
-    tags, setTags, addTag, findTag, updateTag, findTagIndex, deleteTag,
+    tags, setTags, addTag, findTag, updateTag, findTagIndex, deleteTag,getName,
   };
 };
 export {useTags};
